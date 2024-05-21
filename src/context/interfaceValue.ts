@@ -4,6 +4,7 @@ import { useQuery } from 'react-query'
 import PokemonApi from '@/service/PokemonService'
 
 class ValueProvider {
+  
   public getPokemonsNames = (): HandlerParams.IPokemonsName[] => {
     const [pokeNameList, setPokeInfoList] = useState<HandlerParams.IPokemonsName[]>(
       []
@@ -27,6 +28,7 @@ class ValueProvider {
     }, [isError])
     return pokeNameList
   }
+
 }
 
 export default new ValueProvider()

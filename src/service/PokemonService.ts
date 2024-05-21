@@ -22,7 +22,7 @@ class PokemonApi {
     }
 
     const res =
-      await api.get<HandlerParams.ParsedResponseAxios<HandlerParams.IPokemonsName>>(
+      await api.get<HandlerParams.IPokemonValue<any>>(
         url
       )
 
@@ -31,3 +31,4 @@ class PokemonApi {
 }
 
 export default new PokemonApi()
+ 

@@ -6,11 +6,9 @@ declare namespace HandlerParams {
   }
 
   // prop da request axios para pegar todos os dados do pokemon pelo nome
-
-  export interface IGetPokemoInfoByIdOrName {
-    name?: string
-    id?: number
-  }
+  // export interface IGetPokemoInfoByIdOrName {
+  //   name: string
+  // }
 
   // retorno da function do service
   export interface ParsedResponseAxios<K> {
@@ -20,13 +18,22 @@ declare namespace HandlerParams {
     results: K[]
   }
 
-  // interface do value dos objetos da response que vem da api GetPokemonsName
+  // // interface do value dos objetos da response que vem da api GetPokemonsName
   export interface IPokemonsName {
     name: string
     url: string
   }
 
-  export interface IPokemonValue<K> {
-    value: k
+  // // interfa da function do service
+  // export interface IPokemonValue<K> {
+  //   value: K
+  // }
+
+  export interface IPokemonSticker {
+    id: number
+    name: string
+    sprites: {
+      front_default: string
+    }
   }
 }

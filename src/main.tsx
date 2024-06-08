@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter } from 'react-router-dom'
 
-import { AppProvider } from './context/provider.tsx'
 import './styles/globals.css'
+import FallbackAnimation from './assets/FalbackAnimation.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } }
@@ -12,13 +12,9 @@ const queryClient = new QueryClient({
 const App = lazy(() => import('./App.tsx'))
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Suspense fallback={<h1>Loading ...</h1>}>
+    <Suspense fallback={<FallbackAnimation />}>
       <QueryClientProvider client={queryClient}>
-        <AppProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </AppProvider>
+        <BrowserRouter children={<App />} />
       </QueryClientProvider>
     </Suspense>
   </React.StrictMode>

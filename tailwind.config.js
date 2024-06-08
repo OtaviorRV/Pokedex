@@ -7,7 +7,7 @@ module.exports = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
-  prefix: "y",
+  prefix: "",
   theme: {
     container: {
       center: true,
@@ -18,6 +18,28 @@ module.exports = {
     },
     extend: {
       colors: {
+        Identity:{ Primary:'#DC0A2D'},
+        PokemonTypeColor: {
+          Bug: '#A7B723',
+          Dark: '#75574C',
+          Dragon: '#7037FF',
+          Eletric: '#F9CF30',
+          Fairy: '#E69EAC',
+          Fighting: '#C12239',
+          Fire: '#F57D31',
+          Flying: '#A891EC',
+          Ghost: '#70559B',
+          Grass: '#74CB48',
+          Ground: '#DEC16B',
+          Ice: '#9AD6DF',
+          Normal: '#AAA67F',
+          Poison: '#A43E9E',
+          Psychic: '#FB5584',
+          Rock: '#B69E31',
+          Steel: '#B7B9D0',
+          Water: '#6493EB'
+        },
+        GrayScale: { Dark: '#212121', Medium: '#666666', Light: '#E0E0E0', Background: '#EFEFEF', White: '#FFFFFF' },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -71,6 +93,7 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+     
     },
   },
   plugins: [require("tailwindcss-animate")],

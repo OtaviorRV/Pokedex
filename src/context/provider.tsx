@@ -1,24 +1,41 @@
-import { ReactNode, createContext, useContext } from 'react'
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
+import { useQuery } from 'react-query'
+import PokemonApi from '@/service/PokemonService'
 
-import ValueProvider from './interfaceValue'
+interface IPokemonData {
+  pokemonsInfo: any[]
+}
+const ContextPokemon = createContext({} as IPokemonData)
 
-interface IAppProvider {
+interface IProviderPokemon {
   children: ReactNode
 }
+const ProviderPokemon = ({ children }: IProviderPokemon) => {
+  const [pokeInfoList, setPokeInfoList] = useState<any[]>([])
 
-interface IAppContext {
-  pokeNameList: HandlerParams.IPokemonsName[]
+  const { data, isError, error } = useQuery({
+    queryKey: 'getPokemon',
+    queryFn: async () => {
+      const res = await PokemonApi.getPokemonsInfo({ offset: 0, limit: 9 })
+      console.log('res', res)
+      return res
+    }
+  })
+  useEffect(() => {
+    if (isError) {
+      console.error('Erro ao chamar api: ', error)
+    }
+    if (data) {
+      setPokeInfoList((prev: any) => [...prev, ...data])
+    }
+  }, [data, isError, error])
+
+  console.log('provider', pokeInfoList)
+
+  const value: IPokemonData = { pokemonsInfo: pokeInfoList }
+
+  return <ContextPokemon.Provider value={value}>{children}</ContextPokemon.Provider>
 }
-export const AppContext = createContext({} as IAppContext)
+export default ProviderPokemon
 
-export const AppProvider = ({ children }: IAppProvider) => {
-  const { getPokemonsNames } = ValueProvider
-
-  const value = { pokeNameList: getPokemonsNames() }
-
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>
-}
-
-export const usePokemon = () => {
-  return useContext(AppContext)
-}
+export const useContextPokemon = () => useContext(ContextPokemon)
